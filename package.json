@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "start": "vue-cli-service serve --development",
+    "build": "vue-cli-service build --production",
+    "buildtest": "vue-cli-service serve --production"
   },
   "dependencies": {
     "vue": "^2.5.17",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
