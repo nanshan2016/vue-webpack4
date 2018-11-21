@@ -1,23 +1,38 @@
 /**
  * Created by gaoying on 2018/11/19.
  */
+var path = require('path');
 module.exports = {
-    baseUrl:process.env.NODE_ENV === 'production'?'//st01.chrstatic.com':'',
+    baseUrl:process.env.NODE_ENV === 'production'?'./':'',
     filenameHashing:false,
     pages: {
       index: {
-        entry: 'src/main.js',
+        entry: 'src/entry/main.js',
         // the source template
-        template: process.env.NODE_ENV === 'production'?'public/index_pro.html':'public/index_dev.html',
+        template: process.env.NODE_ENV === 'production'?'src/entry/index_pro.html':'src/entry/index_dev.html',
         // output as dist/index.html
         filename: 'index.html',
         // when using title option,
         // template title tag needs to be <title><%= htmlWebpackPlugin.options.title %></title>
         title: '直面',
-        chunks:['chunk-vendors', 'chunk-common', 'index'],
+        chunks:['chunk-vendors', 'chunk-common','index'],
+        
       }
     },
+    chainWebpack: config => {
+        if(config.plugins.has('extract-css')) {
+          const extractCSSPlugin = config.plugin('extract-css')
+          extractCSSPlugin && extractCSSPlugin.tap(() => [{
+            filename: 'css/[name].css',
+            chunkFilename: 'css/app-[id].css'
+          }])
+        }
+      },
     configureWebpack:{
+        output: {
+            filename: 'js/[name].js',
+            chunkFilename: 'js/app-[id].js'
+        },
         externals:function externals(){
             return process.env.NODE_ENV === 'production'?{
               'vue': 'Vue',
@@ -26,7 +41,9 @@ module.exports = {
               'vue-resource': 'VueResource'
             }:{}      
         }(),
+        
     },
+    
     devServer: {
         // 设置主机地址
         host: 'localhost',
