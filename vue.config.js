@@ -46,9 +46,10 @@ module.exports = {
     
     devServer: {
         // 设置主机地址
-        host: 'localhost',
+        host: '0.0.0.0',
         // 设置默认端口
         port: 8011,
+        //https:true,
         // 设置代理
         proxy: {
             '/mock': {
