@@ -1,5 +1,3 @@
-# zhimian-c
-
 ## Project setup
 ```
 npm install
