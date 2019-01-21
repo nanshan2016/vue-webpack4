@@ -54,7 +54,7 @@ module.exports = {
         proxy: {
             '/mock': {
                 // 目标 API 地址
-                target: 'http://10.132.20.14:8083/mockjsdata/73',
+                target: '',
                 // 如果要代理 websockets
                 ws: false,
                 // 将主机标头的原点更改为目标URL
